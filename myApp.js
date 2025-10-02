@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-
+const ninetyDaysInSeconds = 90 * 24 * 60 * 60;
 const helmet = require('helmet');
 app.use(helmet.hidePoweredBy());
 // Usar Helmet para proteger todas las rutas
@@ -15,10 +15,24 @@ app.use(helmet.noSniff());
 app.use(helmet.xssFilter());
 app.use(helmet.ieNoOpen());
 
+app.use(
+  helmet.hsts({
+    maxAge: ninetyDaysInSeconds,
+    force: true
+  })
+);
 
+app.use(helmet.dnsPrefetchControl({ allow: false }));
+app.use(helmet.noCache());
 
-
-
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],               // Solo confiar en tu propio dominio por defecto
+      scriptSrc: ["'self'", "trusted-cdn.com"]  // Solo scripts de tu dominio y trusted-cdn.com
+    }
+  })
+);
 
 
 
