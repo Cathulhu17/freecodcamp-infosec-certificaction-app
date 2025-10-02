@@ -10,6 +10,7 @@ app.get('/', (req, res) => {
   res.send('Hola, tu app está protegida con Helmet.js 🚀');
 });
 
+helmet.frameguard({ action: 'deny' })
 
 
 
