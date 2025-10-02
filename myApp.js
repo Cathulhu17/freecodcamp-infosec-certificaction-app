@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(helmet.frameguard({ action: 'deny' }));
-
+app.use(helmet.noSniff());
 app.use(helmet.xssFilter());
 
 
