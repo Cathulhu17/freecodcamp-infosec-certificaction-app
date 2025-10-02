@@ -3,7 +3,7 @@ const app = express();
 
 
 app.use(helmet());
-
+app.use(helmet.hidePoweredBy());
 app.get('/', (req, res) => {
   res.send('Hola, tu app está protegida con Helmet.js 🚀');
 });
