@@ -1,14 +1,18 @@
 const express = require('express');
 const app = express();
 
-
+const helmet = require('helmet');
+app.use(helmet.hidePoweredBy());
+// Usar Helmet para proteger todas las rutas
 app.use(helmet());
 
 app.get('/', (req, res) => {
   res.send('Hola, tu app está protegida con Helmet.js 🚀');
 });
 
-app.use(helmet.hidePoweredBy());
+
+
+
 
 
 
