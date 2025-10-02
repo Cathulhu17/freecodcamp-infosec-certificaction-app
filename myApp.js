@@ -12,14 +12,7 @@ app.get('/', (req, res) => {
 
 app.use(helmet.frameguard({ action: 'deny' }));
 
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'"],
-    },
-  })
-);
+app.use(helmet.xssFilter());
 
 
 
