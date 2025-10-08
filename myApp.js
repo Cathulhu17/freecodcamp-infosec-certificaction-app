@@ -1,15 +1,7 @@
 const express = require('express');
 const app = express();
 const ninetyDaysInSeconds = 90 * 24 * 60 * 60;
-const helmet = require('helmet');
-const bcrypt = require('bcrypt');
-const plainPassword = 'miContraseñaSegura';
-const saltRounds = 12; // nivel de seguridad recomendado
 
-bcrypt.hash(plainPassword, saltRounds, (err, hash) => {
-  if (err) throw err;
-  console.log('Hash generado:', hash);
-});
 app.use(helmet.hidePoweredBy());
 // Usar Helmet para proteger todas las rutas
 app.use(helmet());
@@ -42,7 +34,15 @@ app.use(
   })
 );
 
+const helmet = require('helmet');
+const bcrypt = require('bcrypt');
+const plainPassword = 'miContraseñaSegura';
+const saltRounds = 12; // nivel de seguridad recomendado
 
+bcrypt.hash(plainPassword, saltRounds, (err, hash) => {
+  if (err) throw err;
+  console.log('Hash generado:', hash);
+});
 
 
 
